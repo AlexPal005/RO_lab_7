@@ -84,6 +84,25 @@ public class Airport{
             throw new RuntimeException();
         }
     }
+    public ResultSet get_all_airlines(){
+        try{
+            String sql_command = "SELECT * FROM airlines;";
+            ResultSet res = statement.executeQuery(sql_command);
+            return res;
+        }catch(SQLException e){
+            throw new RuntimeException();
+        }
+    }
+    public ResultSet get_trips_by_airline(String name){
+        try{
+            String sql_command = "SELECT * FROM trips INNER JOIN airlines ON airlines.name =" +"\"" + name + "\"" + "\n" +
+                                 "WHERE airlines.id_airline = trips.id_airl;";
+            ResultSet res = statement.executeQuery(sql_command);
+            return res;
+        }catch(SQLException e){
+            throw new RuntimeException();
+        }
+    }
     public void stop(){
         try{
             statement.close();

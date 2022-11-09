@@ -29,6 +29,7 @@ public class Menu {
             show_menu();
             int switch_val;
             switch_val = in.nextInt();
+            in.nextLine();
             switch (switch_val) {
                 case (1):
                     add_airline();
@@ -50,6 +51,12 @@ public class Menu {
                     break;
                 case (7):
                     get_all_airl_trips();
+                    break;
+                case (8):
+                    get_all_airlines();
+                    break;
+                case (9):
+                    get_trips_by_name_airline();
                     break;
                 default:
                     System.out.println("Помилка! Уведіть номер пункту меню!");
@@ -162,15 +169,58 @@ public class Menu {
     }
     private void get_all_airl_trips(){
         ResultSet res = airport.get_all();
+        int prev_id_airline = 0;
         try{
-            res.next();
             while(res.next()){
                 int id_airline = res.getInt("id_airline");
-                String name = res.getString("name");
-                System.out.println(id_airline + " " + name);
+                if(id_airline != prev_id_airline){
+                    String name = res.getString("name");
+                    System.out.println(id_airline + " " + name);
+                }
+                prev_id_airline = id_airline;
+                if(res.getInt("id_trip") != 0){
+                    System.out.print("\t" + res.getInt("id_trip") + " ");
+                    System.out.print( res.getString("city_from") + " ");
+                    System.out.print(res.getString("city_to") + " ");
+                    System.out.print(res.getDouble("price") + " ");
+                    System.out.print(res.getInt("id_airl") + "\n");
+                }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+    private void get_all_airlines(){
+        ResultSet res = airport.get_all_airlines();
+        try{
+            while(res.next()){
+                System.out.print(res.getInt("id_airline") +" " + res.getString("name") + "\n");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    private void get_trips_by_name_airline(){
+        System.out.println("Уведіть назву авіакомпанії: ");
+        String name = in.nextLine();
+        ResultSet res = airport.get_trips_by_airline(name);
+        try{
+            if(res.next()){
+                System.out.println(res.getInt("id_airline") + " " + res.getString("name") );
+                do{
+                    System.out.print(res.getInt("id_trip") + " ");
+                    System.out.print(res.getString("city_from") + " ");
+                    System.out.print(res.getString("city_to") + " ");
+                    System.out.print(res.getDouble("price") + " ");
+                    System.out.println(res.getInt("id_airl"));
+                }while(res.next());
+            }
+            else{
+                System.out.println("Не знайдено!");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }
