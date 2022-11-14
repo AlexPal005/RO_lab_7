@@ -77,7 +77,7 @@ public class Menu {
             System.out.println("Помилка! Авіакомпанія не додана!");
         }
         else{
-            System.out.println("Видалено!");
+            System.out.println("Додано!");
         }
     }
     private void delete_airline(){
