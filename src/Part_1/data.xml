@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="WINDOWS-1251" standalone="no"?>
 <Airport>
-    <Airline code="1" name="Авіакомпанія1">
-        <trip city_from="Київ" city_to="Лондон" code="1" number_airline="1" price="200.0"/>
-        <trip city_from="Київ" city_to="Харків" code="5" number_airline="1" price="200.0"/>
-        <trip city_from="Київ" city_to="Вашингтон" code="7" number_airline="1" price="2000.0"/>
-    </Airline>
-    <Airline code="2" name="Авіакомпанія2">
-        <trip city_from="Київ" city_to="Варшава" code="2" number_airline="2" price="1000.0"/>
-    </Airline>
     <Airline code="3" name="Авіакомпанія3">
         <trip city_from="Київ" city_to="Париж" code="4" number_airline="3" price="100.0"/>
     </Airline>
