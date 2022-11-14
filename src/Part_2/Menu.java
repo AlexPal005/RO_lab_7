@@ -69,7 +69,7 @@ public class Menu {
         int id = in.nextInt();
         in.nextLine();
         if(id <= 0 ){
-            System.out.println();
+            System.out.println("id має бути більшим за 0");
         }
         System.out.println("Уведіть назву: ");
         String name = in.nextLine();
